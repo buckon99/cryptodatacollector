@@ -1,0 +1,32 @@
+{
+  "name": "cryptodatacollector",
+  "version": "1.0.0",
+  "description": "Program for collecting data relating to cryptocurrencies",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/jackbtroop62/cryptodatacollector.git"
+  },
+  "keywords": [
+    "crypto",
+    "data",
+    "collector",
+    "cryptocurrency"
+  ],
+  "author": "Jack Buckon",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jackbtroop62/cryptodatacollector/issues"
+  },
+  "homepage": "https://github.com/jackbtroop62/cryptodatacollector#readme",
+  "devDependencies": {
+    "nodemon": "^1.12.1"
+  },
+  "dependencies": {
+    "express": "^4.16.2",
+    "mongoose": "^4.12.4"
+  }
+}
