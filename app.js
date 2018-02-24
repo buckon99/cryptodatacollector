@@ -3,6 +3,7 @@ var WebSocket  = require('ws');
 const mongoose = require('mongoose');
 var ws = new WebSocket('wss://ws-feed.gdax.com');
 const OrderBookItem = require('./models/OrderBookItem');
+const TransactionItem = require('./models/TransactionItem');
 
 mongoose.connection.on('error', (err) => {
   console.error(err);
@@ -18,8 +19,8 @@ ws.on('open', function() {
             "ETH-USD"
         ],
         "channels": [
-            /*"full",*/
-            "level2"
+            "level2",
+            "ticker"
         ]
     };
     ws.send(JSON.stringify(data));
@@ -82,6 +83,22 @@ ws.on('message', function(message) {
                     }
                 });
             }
+        });
+    }else if(json.type == "ticker"){
+        //TODO: Aggregation system for saving space
+        console.log("match found");
+        console.log(json.trade_id);
+        console.log(json.side + ': ' + json.price + '(' + json.last_size + ')');
+        var item = new TransactionItem({
+            product_id: json.product_id,
+            trade_id: json.trade_id,
+            sequence: json.sequence,
+            price: json.price,
+            size: json.last_size,
+            side: json.side
+        });
+        item.save((err) => {
+            if (err) { return next(err); }
         });
     }
 });
